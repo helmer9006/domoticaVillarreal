@@ -9,9 +9,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <html lang="es"/>
+        <html lang="es" />
         <Head>
           <title>Domótica</title>
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
