@@ -1,6 +1,6 @@
 import React from "react";
 
-const cartWidget = () => {
+const CartWidget = () => {
   return (
     <div style={{ position: "relative" }}>
       <i
@@ -17,4 +17,4 @@ const cartWidget = () => {
   );
 };
 
-export default cartWidget;
+export default CartWidget;
