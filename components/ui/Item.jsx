@@ -18,20 +18,35 @@ import React from "react";
 //   }
 // `;
 
-const Item = ({ id, name, slug, images, price, regular_price }) => {
-
+const Item = ({ product }) => {
+  const {
+    id,
+    name,
+    slug,
+    description,
+    sku,
+    price,
+    images: [src],
+  } = product;
   return (
     <>
-      <div className="card" style={{ width: "18rem" }}>
+      <div className="card" style={{ width: "100rem" }}>
         <img className="card-img-top" src=".." alt="Card image cap" />
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
-          <p className="card-text">
-            {name}
-          </p>
-          <a href="#" className="btn btn-primary">
+          <p className="card-text">{name}</p>
+          {/* <a href="#" className="btn btn-primary">
             añadir al carrito
-          </a>
+          </a> */}
+          <i
+            className="material-icons md-48"
+            data-toggle="carrito"
+            data-placement="carrito"
+            title="carrito"
+            style={{ cursor: "pointer" }}
+          >
+            shopping_cart
+          </i>
         </div>
         <h1>precio {price}</h1>
       </div>
