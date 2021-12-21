@@ -28,27 +28,41 @@ const Item = ({ product }) => {
     price,
     images: [src],
   } = product;
+
+  console.log(product.images[0].src);
   return (
     <>
-      <div className="card" style={{ width: "100rem" }}>
-        <img className="card-img-top" src=".." alt="Card image cap" />
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-          <p className="card-text">{name}</p>
-          {/* <a href="#" className="btn btn-primary">
-            añadir al carrito
-          </a> */}
-          <i
-            className="material-icons md-48"
-            data-toggle="carrito"
-            data-placement="carrito"
-            title="carrito"
-            style={{ cursor: "pointer" }}
-          >
-            shopping_cart
-          </i>
+      <div className="col-sm-3">
+        <div className="card m-1">
+        <img src={product.images[0].src} class="card-img-top" alt={name}/>
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            {/* <p class="card-text">{description}</p> */}
+            <a href="#" className="btn btn-primary center">
+              $ {price}
+            </a>
+            <div className="d-flex justify-content-around pt-5 pb-4">
+              <i
+                className="material-icons md-24"
+                data-toggle="carrito"
+                data-placement="carrito"
+                title="carrito"
+                style={{ cursor: "pointer" }}
+              >
+                shopping_cart
+              </i>{" "}
+              <i
+                className="material-icons md-24"
+                data-toggle="carrito"
+                data-placement="carrito"
+                title="carrito"
+                style={{ cursor: "pointer" }}
+              >
+                search
+              </i>
+            </div>
+          </div>
         </div>
-        <h1>precio {price}</h1>
       </div>
     </>
   );

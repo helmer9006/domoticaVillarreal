@@ -3,7 +3,7 @@ import Item from "./Item";
 
 const ItemList = ({ query }) => {
   return (
-    <div className="d-flex justify-content-between">
+    <div className=" row d-flex justify-content-start">
       {query.isError ? <p>Error recuperando la lista de productos</p> : null}
       {query.data
         ? query.data.map((product) => (

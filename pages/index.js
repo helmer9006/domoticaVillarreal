@@ -13,10 +13,7 @@ const index = () => {
           <title>Domotica Villarreal </title>
         </Head>
         <Layout />
-        <div
-          className="container"
-          style={{ background: "#E3E3D8"}}
-        >
+        <div  className="container py-3" style={{ background: "#ececec" }}>
           <ItemListContainer />
         </div>
       </div>
