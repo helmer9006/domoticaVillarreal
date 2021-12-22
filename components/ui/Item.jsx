@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect } from "react";
 import ItemCount from "./ItemCount";
 // import styled from "styled-components";
@@ -35,19 +36,25 @@ const Item = ({ product }) => {
 
   return (
     <>
-      <div className="col-sm-3">
-        <div className="card m-1">
-          <img src={product.images[0].src} class="card-img-top" alt={name} />
+      <div className="col-sm-3 ">
+        <div className=" m-1 producto">
+          <img
+            src={product.images[0].src}
+            className="card-img-top"
+            alt={name}
+          />
           <div className="card-body">
             <h5 className="card-title">{name}</h5>
 
-            <p class="card-text">
+            <p className="card-text">
               Stock: {stock_quantity > 0 ? stock_quantity : 0}
             </p>
 
-            <a href="#" className="btn btn-outline-primary center">
-              <strong>$ {price}</strong>
-            </a>
+            <Link href="#">
+              <a className="btn btn-outline-primary center">
+                <strong>$ {price}</strong>
+              </a>
+            </Link>
 
             {/* <div className="d-flex justify-content-around pt-5 pb-4">
               <i
