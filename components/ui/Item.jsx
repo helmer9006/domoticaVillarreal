@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ItemCount from "./ItemCount";
 // import styled from "styled-components";
 
 // const Card = styled.div`
@@ -25,23 +26,30 @@ const Item = ({ product }) => {
     slug,
     description,
     sku,
+    stock_quantity,
     price,
     images: [src],
   } = product;
 
-  console.log(product.images[0].src);
+  const initial = stock_quantity > 0 ? 1 : 0;
+
   return (
     <>
       <div className="col-sm-3">
         <div className="card m-1">
-        <img src={product.images[0].src} class="card-img-top" alt={name}/>
+          <img src={product.images[0].src} class="card-img-top" alt={name} />
           <div className="card-body">
             <h5 className="card-title">{name}</h5>
-            {/* <p class="card-text">{description}</p> */}
-            <a href="#" className="btn btn-primary center">
-              $ {price}
+
+            <p class="card-text">
+              Stock: {stock_quantity > 0 ? stock_quantity : 0}
+            </p>
+
+            <a href="#" className="btn btn-outline-primary center">
+              <strong>$ {price}</strong>
             </a>
-            <div className="d-flex justify-content-around pt-5 pb-4">
+
+            {/* <div className="d-flex justify-content-around pt-5 pb-4">
               <i
                 className="material-icons md-24"
                 data-toggle="carrito"
@@ -60,7 +68,9 @@ const Item = ({ product }) => {
               >
                 search
               </i>
-            </div>
+            </div> */}
+
+            <ItemCount stock_quantity={stock_quantity} initial={initial} />
           </div>
         </div>
       </div>
