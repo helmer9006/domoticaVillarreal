@@ -1,4 +1,3 @@
-
 import Layout from "../components/layout/Layout";
 import ItemListContainer from "../components/ui/ItemListContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
