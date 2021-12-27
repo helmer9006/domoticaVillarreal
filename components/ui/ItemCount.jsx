@@ -7,7 +7,7 @@ const ItemCount = ({ stock_quantity, initial }) => {
     setOnAdd(onAdd + 1);
   };
   const handledRestar = () => {
-    if (onAdd <= 0) return;
+    if (onAdd <= 1) return;
     setOnAdd(onAdd - 1);
   };
   return (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import ItemCount from "./ItemCount";
+import { useRouter } from "next/router";
 // import styled from "styled-components";
 
 // const Card = styled.div`
@@ -37,15 +38,20 @@ const Item = ({ product }) => {
   return (
     <>
       <div className="col-sm-3 ">
-        <div className=" m-1 producto">
-          <img
-            src={product.images[0].src}
-            className="card-img-top"
-            alt={name}
-          />
+        <div className=" m-1 producto" style={{ cursor: "pointer" }}>
+          <Link href="/products/[id]" as={`/products/${id}`}>
+            <img
+              src={product.images[0].src}
+              className="card-img-top"
+              alt={name}
+            />
+          </Link>
           <div className="card-body">
-            <h5 className="card-title">{name}</h5>
-
+            <Link href="/products/[id]" as={`/products/${id}`}>
+              <h5 className="card-title" style={{ cursor: "pointer" }}>
+                {name}
+              </h5>
+            </Link>
             <p className="card-text">
               Stock: {stock_quantity > 0 ? stock_quantity : 0}
             </p>
@@ -56,7 +62,7 @@ const Item = ({ product }) => {
               </a>
             </Link>
 
-            {/* <div className="d-flex justify-content-around pt-5 pb-4">
+            <div className="d-flex justify-content-around pt-5 pb-4">
               <i
                 className="material-icons md-24"
                 data-toggle="carrito"
@@ -65,19 +71,30 @@ const Item = ({ product }) => {
                 style={{ cursor: "pointer" }}
               >
                 shopping_cart
-              </i>{" "}
+              </i>
               <i
                 className="material-icons md-24"
-                data-toggle="carrito"
-                data-placement="carrito"
-                title="carrito"
+                data-toggle="favorito"
+                data-placement="favorito"
+                title="favorito"
                 style={{ cursor: "pointer" }}
               >
-                search
+                favorite_border
               </i>
-            </div> */}
+              <Link href="/products/[id]" as={`/products/${id}`}>
+                <i
+                  className="material-icons md-24"
+                  data-toggle="buscar"
+                  data-placement="buscar"
+                  title="buscar"
+                  style={{ cursor: "pointer" }}
+                >
+                  search
+                </i>
+              </Link>
+            </div>
 
-            <ItemCount stock_quantity={stock_quantity} initial={initial} />
+            {/* <ItemCount stock_quantity={stock_quantity} initial={initial} /> */}
           </div>
         </div>
       </div>

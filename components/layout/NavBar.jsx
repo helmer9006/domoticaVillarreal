@@ -9,7 +9,7 @@ const NavBar = () => {
         <Link href="/">
           <img
             className="navbar-brand"
-            src="domotica.ico"
+            src="/domotica.ico"
             weight="50px"
             height="50px"
             style={{ cursor: "pointer" }}
@@ -34,7 +34,7 @@ const NavBar = () => {
               placeholder="Buscar"
               aria-label="Buscar"
             />
-            <button className="btn btn-outline-success d-flex" type="submit">
+            <button className="btn btn-outline-success d-flex py-1" type="submit">
               <span className="material-icons m-auto ">search</span>
             </button>
           </form>
