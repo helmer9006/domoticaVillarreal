@@ -1,6 +1,6 @@
 import React from "react";
 import ItemCount from "./ItemCount";
-const ItemDetail = (product) => {
+const ItemDetail = ({product}) => {
   const {
     name,
     short_description,
@@ -10,7 +10,7 @@ const ItemDetail = (product) => {
     regular_price,
     images,
     categories,
-  } = product.product;
+  } = product;
   const initial = stock_quantity > 0 ? 1 : 0;
   const stock =
     stock_quantity > 0 ? (
@@ -22,7 +22,7 @@ const ItemDetail = (product) => {
     );
 
   const categorias = categories.map((item) => (
-    <spam className="">{item.name},</spam>
+    <spam key={item.id}  className="">{item.name},</spam>
   ));
 
   return (

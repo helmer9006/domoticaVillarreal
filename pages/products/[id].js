@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ItemDetailContainer from "../../components/ui/ItemDetailContainer";
 import { useRouter } from "next/router";
 import Layout from "../../components/layout/Layout";
@@ -18,11 +18,10 @@ const product = () => {
   const {
     query: { id },
   } = router;
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <ItemDetailContainer id={id} />
-      </Layout>
+      <Layout>{id ? <ItemDetailContainer id={id} /> : null}</Layout>
     </QueryClientProvider>
   );
 };
