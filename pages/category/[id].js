@@ -1,6 +1,9 @@
-import Layout from "../components/layout/Layout";
-import ItemListContainer from "../components/ui/ItemListContainer";
+import React, { useEffect } from "react";
+
+import { useRouter } from "next/router";
+import Layout from "../../components/layout/Layout";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ItemListContainer from "../../components/ui/ItemListContainer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -11,17 +14,17 @@ const queryClient = new QueryClient({
   },
 });
 
-const index = () => {
+const product = () => {
+  const router = useRouter();
+  const {
+    query: { id },
+  } = router;
+
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
-        <Layout />
-        <div className="container py-3">
-          <ItemListContainer id="0" />
-        </div>
-      </div>
+      <Layout> {id ? <ItemListContainer id={id} /> : null}</Layout>
     </QueryClientProvider>
   );
 };
 
-export default index;
+export default product;

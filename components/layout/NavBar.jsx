@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import CartWidget from "../ui/CartWidget";
+import DropdownCategories from "../ui/dropdownCategories";
 
 const NavBar = () => {
   return (
@@ -15,6 +16,7 @@ const NavBar = () => {
             style={{ cursor: "pointer" }}
           />
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -34,7 +36,13 @@ const NavBar = () => {
               placeholder="Buscar"
               aria-label="Buscar"
             />
-            <button className="btn btn-outline-success d-flex py-1" type="submit">
+            <Link href="/">
+              <DropdownCategories />
+            </Link>
+            <button
+              className="btn btn-outline-success d-flex py-1"
+              type="submit"
+            >
               <span className="material-icons m-auto ">search</span>
             </button>
           </form>

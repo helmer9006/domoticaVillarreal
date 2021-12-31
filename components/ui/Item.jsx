@@ -21,7 +21,7 @@ const Item = ({ product }) => {
     <>
       <div className="col-sm-3 ">
         <div className=" m-1 producto" style={{ cursor: "pointer" }}>
-          <Link href="/products/[id]" as={`/products/${id}`}>
+          <Link href="/item/[id]" as={`/item/${id}`}>
             <img
               src={product.images[0].src}
               className="card-img-top"
@@ -29,7 +29,7 @@ const Item = ({ product }) => {
             />
           </Link>
           <div className="card-body">
-            <Link href="/products/[id]" as={`/products/${id}`}>
+            <Link href="/item/[id]" as={`/item/${id}`}>
               <h5 className="card-title" style={{ cursor: "pointer" }}>
                 {name}
               </h5>
