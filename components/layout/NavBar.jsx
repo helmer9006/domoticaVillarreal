@@ -40,7 +40,7 @@ const NavBar = () => {
               <DropdownCategories />
             </Link>
             <button
-              className="btn btn-outline-success d-flex py-1"
+              className="btn btn-outline-primary d-flex py-1"
               type="submit"
             >
               <span className="material-icons m-auto ">search</span>
@@ -48,8 +48,8 @@ const NavBar = () => {
           </form>
           <ul className="navbar-nav mb-2 mb-lg-0 mx-4">
             <li
-              className="nav-item "
-              style={{ background: "#06920f", borderRadius: "50px" }}
+              className="nav-item bg-primary"
+              style={{ borderRadius: "50px" }}
             >
               <Link href="/offers">
                 <a className="nav-link" style={{ color: "#fff" }}>

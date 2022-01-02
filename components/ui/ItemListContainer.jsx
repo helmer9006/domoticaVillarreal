@@ -14,57 +14,30 @@ const override = css`
   border-color: "#593196";
 `;
 const ItemListContainer = ({ id }) => {
+  const [categoryID, setCategoryID] = useState(0);
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#593196");
-  const [products, setProducts] = useState();
-  const endpoint = `https://www.seitel.com.co/wp-json/wc/v3/products?category=${id}&consumer_key=${ck_API_woo}&consumer_secret=${cs_API_woo}`;
-  const productos = useProducts();
+  const productos = useProducts(id);
+  const { isError, isLoading, isSuccess } = productos;
 
-  const fetchProductxCategories = async () => {
-    const response = await fetch(endpoint);
-    if (!response.ok) {
-      s;
-      throw new Error("Error recuperando los productos.");
+  const renderResult = () => {
+    if (isLoading) {
+      return (
+        <ClipLoader color={color} loading={loading} css={override} size={100} />
+      );
     }
-    return response.json();
+    if (isError) {
+      return <div className="search-message">Something went wrong</div>;
+    }
+    if (isSuccess) {
+      if (productos.data) {
+        return <ItemList query={productos} />;
+      }
+    }
+    return <></>;
   };
 
-  const productsxCategories = useQuery(
-    "PRODUCTSXCATEGORIES",
-    fetchProductxCategories,
-    {
-      staleTime: 5000,
-      cacheTime: 0,
-    }
-  );
-
-  console.log(id);
-  return (
-    <>
-      {id != 0 ? (
-        productsxCategories.data ? (
-          <ItemList query={productsxCategories} />
-        ) : (
-          <ClipLoader
-            color={color}
-            loading={loading}
-            css={override}
-            size={100}
-          />
-        )
-      ) : productos.isLoading || productos.isError ? (
-        <ClipLoader color={color} loading={loading} css={override} size={100} />
-      ) : (
-        <ItemList query={productos} />
-      )}
-      {}
-
-      {/* {productos.isLoading && (
-        <ClipLoader color={color} loading={loading} css={override} size={100} />
-      )}
-      <ItemList query={productos} /> */}
-    </>
-  );
+  return <>{renderResult()}</>;
 };
 
 export default ItemListContainer;
