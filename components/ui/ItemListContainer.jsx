@@ -17,8 +17,8 @@ const ItemListContainer = ({ id }) => {
   const [categoryID, setCategoryID] = useState(0);
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#593196");
-  const productos = useProducts(id);
-  const { isError, isLoading, isSuccess } = productos;
+  const products = useProducts(id);
+  const { isError, isLoading, isSuccess } = products;
 
   const renderResult = () => {
     if (isLoading) {
@@ -30,8 +30,8 @@ const ItemListContainer = ({ id }) => {
       return <div className="search-message">Something went wrong</div>;
     }
     if (isSuccess) {
-      if (productos.data) {
-        return <ItemList query={productos} />;
+      if (products.data) {
+        return <ItemList query={products} />;
       }
     }
     return <></>;

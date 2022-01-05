@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 
-const ItemCount = ({ stock_quantity, initial }) => {
-  const [onAdd, setOnAdd] = useState(initial);
-  const handledSumar = () => {
-    if (onAdd >= stock_quantity) return;
-    setOnAdd(onAdd + 1);
+const ItemCount = ({ stock_quantity, initial, onAdd }) => {
+  const [quantityAdd, setOnAdd] = useState(initial);
+  const handledIncrement = () => {
+    if (quantityAdd >= stock_quantity) return;
+    setOnAdd(quantityAdd + 1);
   };
-  const handledRestar = () => {
-    if (onAdd <= 1) return;
-    setOnAdd(onAdd - 1);
+  const handledDecrement = () => {
+    if (quantityAdd <= 1) return;
+    setOnAdd(quantityAdd - 1);
   };
   return (
     <div className="">
       <div className="d-flex justify-content-between border align-items-center my-3 p-1">
         <span
           className="material-icons md-24 gap-3"
-          onClick={handledRestar}
+          onClick={handledDecrement}
           style={{ cursor: "pointer" }}
         >
           remove
         </span>
         <h6 className="m-2">
-          <strong>{onAdd}</strong>
+          <strong>{quantityAdd}</strong>
         </h6>
         <span
           className="material-icons "
-          onClick={handledSumar}
+          onClick={handledIncrement}
           style={{ cursor: "pointer" }}
         >
           add
@@ -34,7 +34,10 @@ const ItemCount = ({ stock_quantity, initial }) => {
       <div>
         <div className="row">
           <div className="col text-center ">
-            <button className="btn btn-primary btn-lg btn-block">
+            <button
+              onClick={onAdd}
+              className="btn btn-primary btn-lg btn-block"
+            >
               Agregar al Carrito
             </button>
           </div>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ItemCount from "./ItemCount";
-const ItemDetail = ({product}) => {
+const ItemDetail = ({ product }) => {
   const {
     name,
     short_description,
@@ -11,6 +11,18 @@ const ItemDetail = ({product}) => {
     images,
     categories,
   } = product;
+
+  //#region  STATE
+  const [added, setAdded] = useState(false);
+  const onAdd = () => {
+    setAdded(true);
+  };
+
+  useEffect(() => {
+    console.log("added", added);
+  }, [added]);
+
+  //#endregion
   const initial = stock_quantity > 0 ? 1 : 0;
   const stock =
     stock_quantity > 0 ? (
@@ -22,7 +34,9 @@ const ItemDetail = ({product}) => {
     );
 
   const categorias = categories.map((item) => (
-    <spam key={item.id}  className="">{item.name},</spam>
+    <spam key={item.id} className="">
+      {item.name},
+    </spam>
   ));
 
   return (
@@ -32,11 +46,17 @@ const ItemDetail = ({product}) => {
       </div>
       <div className="col-md-6">
         {categorias}
-        <h3 className ="mt-2">{name}</h3>
+        <h3 className="mt-2">{name}</h3>
         {stock}
         <h5 className="mt-4">{short_description}</h5>
         <div className="my-5">
-          <ItemCount stock_quantity={stock_quantity} initial={initial} />{" "}
+          {added && (
+            <ItemCount
+              stock_quantity={stock_quantity}
+              initial={initial}
+              onAdd={onAdd}
+            />
+          )}
         </div>
         <h1>$ {regular_price}</h1>
       </div>
