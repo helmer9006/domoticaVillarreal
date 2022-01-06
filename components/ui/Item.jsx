@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 
-
 const Item = ({ product }) => {
-
   const {
     id,
     name,
@@ -20,7 +18,19 @@ const Item = ({ product }) => {
   return (
     <>
       <div className="col-sm-3 ">
-        <div className=" m-1 producto" style={{ cursor: "pointer" }}>
+        <div
+          className=" m-1 producto"
+          style={{ position: "relative", cursor: "pointer" }}
+        >
+          <i
+            className="material-icons md-24 mt-2 ml-2"
+            data-toggle="Lista deseos"
+            data-placement="Lista deseos"
+            title="Lista deseos"
+            style={{ cursor: "pointer", position: "absolute" }}
+          >
+            favorite_border
+          </i>
           <Link href="/item/[id]" as={`/item/${id}`}>
             <img
               src={product.images[0].src}
@@ -30,9 +40,9 @@ const Item = ({ product }) => {
           </Link>
           <div className="card-body">
             <Link href="/item/[id]" as={`/item/${id}`}>
-              <h5 className="card-title" style={{ cursor: "pointer" }}>
+              <h6 className="card-title" style={{ cursor: "pointer" }}>
                 {name}
-              </h5>
+              </h6>
             </Link>
             <p className="card-text">
               Stock: {stock_quantity > 0 ? stock_quantity : 0}
@@ -43,7 +53,7 @@ const Item = ({ product }) => {
                 <strong>$ {price}</strong>
               </a>
             </Link>
-
+            {/* 
             <div className="d-flex justify-content-around pt-5 pb-4">
               <i
                 className="material-icons md-24"
@@ -63,7 +73,7 @@ const Item = ({ product }) => {
               >
                 favorite_border
               </i>
-              <Link href="/products/[id]" as={`/products/${id}`}>
+              <Link href="/item/[id]" as={`/item/${id}`}>
                 <i
                   className="material-icons md-24"
                   data-toggle="buscar"
@@ -74,8 +84,7 @@ const Item = ({ product }) => {
                   search
                 </i>
               </Link>
-            </div>
-
+            </div> */}
             {/* <ItemCount stock_quantity={stock_quantity} initial={initial} /> */}
           </div>
         </div>
