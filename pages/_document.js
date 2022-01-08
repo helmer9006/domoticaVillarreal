@@ -12,6 +12,7 @@ class MyDocument extends Document {
         <html lang="es" />
         <Head>
           {/* <title>Domotica Villarreal</title> */}
+          <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"></link>
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"

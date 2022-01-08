@@ -14,7 +14,6 @@ const Item = ({ product }) => {
   } = product;
 
   const initial = stock_quantity > 0 ? 1 : 0;
-
   return (
     <>
       <div className="col-sm-3 ">

@@ -4,10 +4,9 @@ import ItemListContainer from "../components/ui/ItemListContainer";
 const index = () => {
   return (
     <>
-      <Layout />
-      <div className="container py-3">
+      <Layout>
         <ItemListContainer id="0" />
-      </div>
+      </Layout>
     </>
   );
 };

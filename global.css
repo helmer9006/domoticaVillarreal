@@ -1,3 +1,7 @@
+body {
+    background-color: #ebebeb;
+}
+
 .bg-nav {
     background-color: #7952b3;
 }
@@ -5,8 +9,24 @@
 .producto {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    background-color: #fff;
 }
 
 .producto:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.text-anton {
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.hr {
+    background-color: #d5d5d5;
+    padding: 0;
+    width: 70%;
+    border-radius: 50%;
+    border: 0;
+    height: 1px;
 }
