@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-
-const ItemCount = ({ stock_quantity, initial, onAdd }) => {
+import React, { useState, useEffect } from "react";
+import { useCartContext } from "../../context/CartContext";
+const ItemCount = ({ stock_quantity, initial, onAdd, setQuantityAdd }) => {
   const [quantityAdd, setOnAdd] = useState(initial);
+  const [stateBtnOnAdd, setStateBtnOnAdd] = useState(false);
   const handledIncrement = () => {
     if (quantityAdd >= stock_quantity) return;
     setOnAdd(quantityAdd + 1);
@@ -10,6 +11,14 @@ const ItemCount = ({ stock_quantity, initial, onAdd }) => {
     if (quantityAdd <= 1) return;
     setOnAdd(quantityAdd - 1);
   };
+
+  useEffect(() => {
+    setQuantityAdd(quantityAdd);
+    if (initial === 0) {
+      setStateBtnOnAdd(true);
+    }
+  }, [quantityAdd]);
+
   return (
     <div className="">
       <div className="d-flex justify-content-between border align-items-center my-3 p-1">
@@ -37,6 +46,7 @@ const ItemCount = ({ stock_quantity, initial, onAdd }) => {
             <button
               onClick={onAdd}
               className="btn btn-primary btn-lg btn-block"
+              disabled={stateBtnOnAdd}
             >
               Agregar al Carrito
             </button>

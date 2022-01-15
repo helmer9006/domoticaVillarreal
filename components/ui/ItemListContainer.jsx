@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "./ItemList";
 import useProducts from "./../hook/useProducts";
-import { useQuery } from "react-query";
+import { QueryCache } from "react-query";
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 const url_API_woo = "https://www.seitel.com.co/";
 const ck_API_woo = "ck_d5910d8a72b7c26d335ae52c2688691848004b6c";
 const cs_API_woo = "cs_5a07ef9d12b0ca86ba20c239c3d93eff6798732c";
-
 const override = css`
   display: block;
   margin: 25vh auto;
@@ -27,7 +26,7 @@ const ItemListContainer = ({ id }) => {
       );
     }
     if (isError) {
-      return <div className="search-message">Something went wrong</div>;
+      return <div className="search-message">Algo salió mal</div>;
     }
     if (isSuccess) {
       if (products.data) {

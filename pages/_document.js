@@ -12,7 +12,10 @@ class MyDocument extends Document {
         <html lang="es" />
         <Head>
           {/* <title>Domotica Villarreal</title> */}
-          <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+            rel="stylesheet"
+          ></link>
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
@@ -28,6 +31,7 @@ class MyDocument extends Document {
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"
           ></script>
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         </Head>
         <body>
           <Main />

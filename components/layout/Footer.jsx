@@ -18,7 +18,7 @@ const Footer = () => {
           className="text-center text-light p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
-          © 2020 Copyright - Helmer Villarreal
+          © 2022 Copyright - Helmer Villarreal
         </div>
       </footer>
     </>

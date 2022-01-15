@@ -1,8 +1,13 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useCartContext } from "../../context/CartContext";
 import ItemCount from "./ItemCount";
 const ItemDetail = ({ product }) => {
+  //state
+  const { addItem, isInCart } = useCartContext();
+
   const {
+    id,
     name,
     short_description,
     stock_quantity,
@@ -15,12 +20,25 @@ const ItemDetail = ({ product }) => {
 
   //#region  STATE
   const [added, setAdded] = useState(false);
+  const [quantityAdd, setQuantityAdd] = useState(null);
   const onAdd = () => {
     setAdded(true);
   };
 
   useEffect(() => {
-    console.log("added", added);
+    if (added) {
+      if (!isInCart(id)) {
+        addItem({
+          id: id,
+          name: name,
+          price: price,
+          quantity: quantityAdd,
+        });
+      } else {
+        swal("Oops!", "The product is already added to the cart!", "error");
+        return;
+      }
+    }
   }, [added]);
 
   //#endregion
@@ -35,9 +53,9 @@ const ItemDetail = ({ product }) => {
     );
 
   const categorias = categories.map((item) => (
-    <spam key={item.id} className="">
+    <span key={item.id} className="">
       {item.name},
-    </spam>
+    </span>
   ));
   //  let  newWord = originalWord.replace(/<d>/g, "");
   return (
@@ -78,10 +96,10 @@ const ItemDetail = ({ product }) => {
               stock_quantity={stock_quantity}
               initial={initial}
               onAdd={onAdd}
+              setQuantityAdd={setQuantityAdd}
             />
           )}
         </div>
-        
       </div>
     </div>
   );

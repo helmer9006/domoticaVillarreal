@@ -3,6 +3,8 @@ import React from "react";
 import "../global.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import CartProvider from "../context/CartContext";
+import { CartContextProvider } from "../context/CartContext";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -15,9 +17,11 @@ const queryClient = new QueryClient({
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <CartContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </CartContextProvider>
   );
 }
