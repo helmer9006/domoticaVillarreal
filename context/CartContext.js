@@ -32,24 +32,28 @@ export const CartContextProvider = ({ children }) => {
     setProductsCart([]);
   };
 
-  const isInCart = (productId)=> {
-    return productsCart.some( e => e.id === productId )
-  }
+  const isInCart = (productId) => {
+    return productsCart.some((e) => e.id === productId);
+  };
+
+  const CounterItemCart = () => {
+    return productsCart.length;
+  };
   useEffect(() => {}, []);
 
-  
   const values = useMemo(
     // States y funciones que serán visibles en el contexto.
     () => ({
-      productsCart, 
-      setProductsCart, 
+      productsCart,
+      setProductsCart,
       addItem,
       RemoveItem,
       Clear,
-      isInCart
+      isInCart,
+      CounterItemCart,
     }),
     [productsCart]
-  ); 
+  );
 
   // Interface donde será expuesto como proveedor y envolverá la App.
   return <CartContext.Provider value={values}>{children}</CartContext.Provider>;

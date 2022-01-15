@@ -79,7 +79,7 @@ const ItemDetail = ({ product }) => {
                   // onClick={}
                   className="btn btn-primary btn-lg btn-block"
                 >
-                  Finalizar Compra
+                  Go cart
                 </button>
               </Link>
               <Link href="/">
@@ -87,7 +87,7 @@ const ItemDetail = ({ product }) => {
                   // onClick={}
                   className="btn btn-primary btn-lg btn-block"
                 >
-                  Seguir comprando
+                  Continue Shopping
                 </button>
               </Link>
             </>
