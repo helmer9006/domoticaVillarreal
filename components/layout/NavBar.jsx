@@ -53,13 +53,13 @@ const NavBar = () => {
             >
               <Link href="/offers">
                 <a className="nav-link" style={{ color: "#fff" }}>
-                  Ofertas
+                  Sale
                 </a>
               </Link>
             </li>
             <li className="nav-item mx-3">
               <Link href="/account">
-                <a className="nav-link">Cuenta</a>
+                <a className="nav-link">Account</a>
 
                 {/* <span style={{ cursor: "pointer" }} class="material-icons">
                   person_pin

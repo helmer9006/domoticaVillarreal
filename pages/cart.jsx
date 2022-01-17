@@ -66,7 +66,7 @@ const cart = () => {
                     <th scope="col">QUANTITY</th>
                     <th scope="col">UNIT PRICE</th>
                     <th scope="col">TOTAL PRICE</th>
-                    <th scope="col">OPERATION</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -78,15 +78,19 @@ const cart = () => {
                       <td>{price}</td>
                       <td>{price * quantity}</td>
                       <td>
-                        <button
+                        <i
                           onClick={() => {
                             RemoveItemProduct(id);
                           }}
-                          className="btn-primary"
+                          className="material-icons md-48"
+                          data-toggle="delete"
+                          data-placement="delete"
+                          title="delete"
+                          style={{ cursor: "pointer" }}
                         >
-                          X
-                        </button>
-                      </td>
+                          delete
+                        </i>
+                      </td>  
                     </tr>
                   ))}
                   <tr>

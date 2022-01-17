@@ -3,7 +3,6 @@ import React from "react";
 import "../global.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import CartProvider from "../context/CartContext";
 import { CartContextProvider } from "../context/CartContext";
 const queryClient = new QueryClient({
   defaultOptions: {
