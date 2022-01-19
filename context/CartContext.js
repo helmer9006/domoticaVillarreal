@@ -12,6 +12,7 @@ export const CartContext = createContext(null);
 //Provider
 export const CartContextProvider = ({ children }) => {
   const [productsCart, setProductsCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
   //Add product to the cart
   const addItem = (product) => {
@@ -19,6 +20,14 @@ export const CartContextProvider = ({ children }) => {
       return prevProduct.concat(product);
     });
   };
+
+  useEffect(() => {
+    let valorTotal = productsCart
+      .map((item) => item.price * item.quantity)
+      .reduce((prev, curr) => prev + curr, 0);
+    setTotal(valorTotal);
+    console.log(valorTotal)
+  }, [productsCart]);
 
   //Remove product to the cart
   const RemoveItem = (productId) => {
@@ -51,6 +60,7 @@ export const CartContextProvider = ({ children }) => {
       Clear,
       isInCart,
       CounterItemCart,
+      total,
     }),
     [productsCart]
   );

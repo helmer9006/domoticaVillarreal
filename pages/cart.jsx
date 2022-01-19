@@ -3,6 +3,7 @@ import Layout from "../components/layout/Layout";
 import { useCartContext } from "../context/CartContext";
 import Head from "next/head";
 import Link from "next/link";
+
 const cart = () => {
   //state
   const { productsCart, RemoveItem, Clear } = useCartContext();
@@ -90,7 +91,7 @@ const cart = () => {
                         >
                           delete
                         </i>
-                      </td>  
+                      </td>
                     </tr>
                   ))}
                   <tr>
@@ -118,7 +119,7 @@ const cart = () => {
                     Continue Shopping
                   </button>
                 </Link>
-                <Link href="#">
+                <Link href="/checkout">
                   <button className="align-items-center bg-primary text-white p-2">
                     Checkout
                   </button>
