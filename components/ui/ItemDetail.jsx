@@ -70,7 +70,9 @@ const ItemDetail = ({ product }) => {
         <h5 className="mt-4">
           {short_description.substring(3, short_description.length - 5)}
         </h5>
-        <h1 className="mt-4">$ {regular_price}</h1>
+        <h1 className="mt-4">
+          $ {new Intl.NumberFormat("es-CO").format(regular_price)}
+        </h1>
         <div className="my-5">
           {added ? (
             <>

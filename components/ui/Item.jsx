@@ -49,7 +49,7 @@ const Item = ({ product }) => {
 
             <Link href="#">
               <a className="btn btn-outline-primary center">
-                <strong>$ {price}</strong>
+                <strong>$ {new Intl.NumberFormat("es-CO").format(price)}</strong>
               </a>
             </Link>
             {/* 
