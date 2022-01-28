@@ -79,12 +79,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-{
-  /* 
-<ul>
-      <li>
-        <Link href="/">Inicio</Link>
-        <Link href="/cuenta">Cuenta</Link>
-      </li>
-    </ul> */
-}
