@@ -22,28 +22,32 @@ const ItemListContainer = ({ id }) => {
   const { isError, isLoading, isSuccess } = products;
   const [productFirebase, setProductFirebase] = useState({
     data: [],
-    isLoading: false,
     isError: false,
   });
-
+  const [loadingFirebase, setLoadingFirebase] = useState(false);
+  const [isSuccessFirebase, setIsSuccessFirebase] = useState(false);
+  const [isErrorFirebase, setIsErrorFirebasee] = useState(false);
   useEffect(() => {
-
     const makeReqeust = async () => {
       try {
+        setLoadingFirebase(true);
         const data = await getDocs(collection(db, "products"));
         data.forEach((item) => {
           productFirebase.data.push(item.data());
         });
       } catch (error) {
         console.log(error);
+        setIsErrorFirebasee(true);
       }
     };
     makeReqeust();
     setProductFirebase(productFirebase);
+    setLoadingFirebase(false);
+    setIsSuccessFirebase(true);
   }, []);
 
   const renderResult = () => {
-    if (isLoading) {
+    if (isLoading || loadingFirebase) {
       return (
         <ClipLoader
           color={color}
@@ -53,24 +57,24 @@ const ItemListContainer = ({ id }) => {
         />
       );
     }
-    if (isError) {
+    if (isError || isErrorFirebase) {
       return <div className="search-message">Algo salió mal</div>;
     }
-    if (isSuccess) {
+    if (isSuccess || isSuccessFirebase) {
       if (products.data) {
-        return <ItemList query={products} />;
+        return (
+          <>
+            <ItemList query={products} />
+            <h1 className="text-center my-5">Productos más Vendidos</h1>
+            {productFirebase && <ItemList query={productFirebase} />}
+          </>
+        );
       }
     }
     return <></>;
   };
 
-  return (
-    <>
-      {renderResult()}
-      <h1 className="text-center my-5">Productos más Vendidos</h1>
-      {productFirebase && <ItemList query={productFirebase} />}
-    </>
-  );
+  return <>{renderResult()}</>;
 };
 
 export default ItemListContainer;
