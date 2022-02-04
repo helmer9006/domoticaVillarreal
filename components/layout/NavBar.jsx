@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CartWidget from "../ui/CartWidget";
 import DropdownCategories from "../ui/dropdownCategories";
+import { useCartContext } from "../../context/CartContext";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import db from "../../firebase/firebase";
 
 const NavBar = () => {
+  //state
+  const { addItem } = useCartContext();
+
+  //                                                                                                                                                                                                    state local
+  const [search, setSearch] = useState("");
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const onClick = async (e) => {
+    e.preventDefault();
+    const productRef = collection(db, "products");
+    const q = query(productRef, where("name", "==", `${search}`));
+    console.log(`${search}`);
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      addItem(doc.data());
+    });
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light px-10% bg-light">
       <div className="container">
@@ -35,6 +62,8 @@ const NavBar = () => {
               type="buscar"
               placeholder="Buscar"
               aria-label="Buscar"
+              name="search"
+              onChange={handleChange}
             />
             <Link href="/">
               <DropdownCategories />
@@ -42,6 +71,7 @@ const NavBar = () => {
             <button
               className="btn btn-outline-primary d-flex py-1"
               type="submit"
+              onClick={onClick}
             >
               <span className="material-icons m-auto ">search</span>
             </button>

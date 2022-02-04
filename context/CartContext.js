@@ -26,7 +26,6 @@ export const CartContextProvider = ({ children }) => {
       .map((item) => item.price * item.quantity)
       .reduce((prev, curr) => prev + curr, 0);
     setTotal(valorTotal);
-    console.log(valorTotal)
   }, [productsCart]);
 
   //Remove product to the cart
@@ -48,8 +47,6 @@ export const CartContextProvider = ({ children }) => {
   const CounterItemCart = () => {
     return productsCart.length;
   };
-  useEffect(() => {}, []);
-
   const values = useMemo(
     // States y funciones que serán visibles en el contexto.
     () => ({
