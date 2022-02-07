@@ -47,6 +47,8 @@ export const CartContextProvider = ({ children }) => {
   const CounterItemCart = () => {
     return productsCart.length;
   };
+  useEffect(() => {}, []);
+
   const values = useMemo(
     // States y funciones que serán visibles en el contexto.
     () => ({

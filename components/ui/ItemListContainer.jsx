@@ -1,51 +1,62 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "./ItemList";
-import useProducts from "./../hook/useProducts";
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import db from "../../firebase/firebase";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
-import ItemsMasVendidos from "./ItemsMasVendidos";
 import { useProductsContext } from "../../context/ProductsContext";
+
 const override = css`
   display: block;
   margin: 25vh auto;
   border-color: "#593196";
 `;
 const ItemListContainer = ({ id }) => {
-  const { addProducts } = useProductsContext();
-  const [categoryID, setCategoryID] = useState(0);
+  const {
+    products,
+    isLoading,
+    isSuccess,
+    isError,
+    setProducts,
+    addItem,
+    setIsLoading,
+    setIsSuccess,
+    setIsError,
+  } = useProductsContext();
+
   let [color, setColor] = useState("#593196");
-  const products = useProducts(id);
-  const { isError, isLoading, isSuccess } = products;
-  const [productFirebase, setProductFirebase] = useState({
-    data: [],
-    isError: false,
-  });
-  const [loadingFirebase, setLoadingFirebase] = useState(false);
-  const [isSuccessFirebase, setIsSuccessFirebase] = useState(false);
-  const [isErrorFirebase, setIsErrorFirebasee] = useState(false);
+
   useEffect(() => {
     const makeRequest = async () => {
+      console.log(id);
+      setIsLoading(true);
       try {
-        setLoadingFirebase(true);
-        const data = await getDocs(collection(db, "products"));
+        const Items =
+          id != 0
+            ? query(
+                collection(db, "products"),
+                where("categories.id", "==", id)
+              )
+            : collection(db, "products");
+        const data = await getDocs(Items);
+        // const data = await getDocs(collection(db, "products"));
         data.forEach((item) => {
-          productFirebase.data.push(item.data());
+          //añadimos productos de firebase a state products
+          addItem(item.data());
+          setIsLoading(false);
+          setIsSuccess(true);
         });
       } catch (error) {
         console.log(error);
-        setIsErrorFirebasee(true);
+        setIsError(true);
       }
     };
+
     makeRequest();
-    setProductFirebase(productFirebase);
-    setLoadingFirebase(false);
-    setIsSuccessFirebase(true);
-  }, []);
+  }, [id]);
 
   const renderResult = () => {
-    if (isLoading || loadingFirebase) {
+    if (isLoading) {
       return (
         <ClipLoader
           color={color}
@@ -55,16 +66,14 @@ const ItemListContainer = ({ id }) => {
         />
       );
     }
-    if (isError || isErrorFirebase) {
+    if (isError) {
       return <div className="search-message">Algo salió mal</div>;
     }
-    if (isSuccess || isSuccessFirebase) {
-      if (products.data) {
+    if (isSuccess) {
+      if (products) {
         return (
           <>
-            <ItemList query={products} />
-            <h1 className="text-center my-5">Productos más Vendidos</h1>
-            {productFirebase.data && <ItemList query={productFirebase} />}
+            <ItemList />
           </>
         );
       }

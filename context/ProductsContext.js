@@ -7,14 +7,17 @@ import React, {
 } from "react";
 
 //Context
-export const ProductsContext = createContext([]);
+export const ProductsContext = createContext(null);
 
 //Provider
-export const productsContextProvider = ({ children }) => {
+export const ProductsContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  //Add products al state
-  const addProducts = (product) => {
+  //Add product funciones a state
+  const addItem = (product) => {
     setProducts((prevProduct) => {
       return prevProduct.concat(product);
     });
@@ -24,10 +27,16 @@ export const productsContextProvider = ({ children }) => {
     // States y funciones que serán visibles en el contexto.
     () => ({
       products,
+      isLoading,
+      isSuccess,
+      isError,
       setProducts,
-      addProducts,
+      addItem,
+      setIsLoading,
+      setIsSuccess,
+      setIsError,
     }),
-    [products]
+    [products, isLoading]
   );
 
   // Interface donde será expuesto como proveedor y envolverá la App.
