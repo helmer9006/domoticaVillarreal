@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import useCategories from "../hook/useCategories";
 import Link from "next/link";
 

@@ -30,7 +30,7 @@ const cart = () => {
       }
     });
   };
-
+ 
   const ResetItemsCart = (id) => {
     swal({
       title: "Are you sure you want to remove all product of the cart?",

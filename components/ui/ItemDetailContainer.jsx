@@ -18,15 +18,13 @@ const cs_API_woo = "cs_5a07ef9d12b0ca86ba20c239c3d93eff6798732c";
 const ItemDetailContainer = ({ id }) => {
   const { products, isLoading, isSuccess, isError } = useProductsContext();
   const product = products.filter((item) => item.id == id);
-
+  
+  // return productsCart.filter((e) => e.id === productId);
   let [color, setColor] = useState("#593196");
+  // const product = useProduct(id);
   return (
     <>
-      {product.length > 0 ? (
-        <ItemDetail product={product[0]} />
-      ) : (
-        <p>No se ha encontrado</p>
-      )}
+      {product.length > 0 ? <ItemDetail product={product[0]} /> : <p>No se ha encontrado</p>}
     </>
   );
 };

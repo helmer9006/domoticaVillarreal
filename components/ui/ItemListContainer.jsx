@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import db from "../../firebase/firebase";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { useProductsContext } from "../../context/ProductsContext";
+import { stringify } from "@firebase/util";
 
 const override = css`
   display: block;
@@ -24,22 +25,29 @@ const ItemListContainer = ({ id }) => {
     setIsError,
   } = useProductsContext();
 
+  // let itemList = id ? : products
   let [color, setColor] = useState("#593196");
 
   useEffect(() => {
+    console.log(id);
+
+    let filteredProducts = products.filter((product) => {
+      var allow = false;
+      for (const category of product.categories) {
+        // console.log(temp);
+        if (!allow) {
+          allow = category.id !== id;
+        }
+      }
+      return allow;
+    });
+    alert(stringify(filteredProducts));
+  }, []);
+  useEffect(() => {
     const makeRequest = async () => {
-      console.log(id);
       setIsLoading(true);
       try {
-        const Items =
-          id != 0
-            ? query(
-                collection(db, "products"),
-                where("categories.id", "==", id)
-              )
-            : collection(db, "products");
-        const data = await getDocs(Items);
-        // const data = await getDocs(collection(db, "products"));
+        const data = await getDocs(collection(db, "products"));
         data.forEach((item) => {
           //añadimos productos de firebase a state products
           addItem(item.data());
@@ -51,9 +59,10 @@ const ItemListContainer = ({ id }) => {
         setIsError(true);
       }
     };
-
-    makeRequest();
-  }, [id]);
+    if (products.length < 1) {
+      makeRequest();
+    }
+  }, []);
 
   const renderResult = () => {
     if (isLoading) {
