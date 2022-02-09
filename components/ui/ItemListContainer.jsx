@@ -5,16 +5,17 @@ import ClipLoader from "react-spinners/ClipLoader";
 import db from "../../firebase/firebase";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { useProductsContext } from "../../context/ProductsContext";
-import { stringify } from "@firebase/util";
 
 const override = css`
   display: block;
   margin: 25vh auto;
   border-color: "#593196";
 `;
-const ItemListContainer = ({ id }) => {
+const ItemListContainer = ({ id: IdCat }) => {
+  const [filterItems, setFilterItems] = useState();
   const {
     products,
+    productsCategories,
     isLoading,
     isSuccess,
     isError,
@@ -23,44 +24,43 @@ const ItemListContainer = ({ id }) => {
     setIsLoading,
     setIsSuccess,
     setIsError,
+    filterForCategory,
+    setCat,
   } = useProductsContext();
 
   // let itemList = id ? : products
   let [color, setColor] = useState("#593196");
 
   useEffect(() => {
-    console.log(id);
-
-    let filteredProducts = products.filter((product) => {
-      var allow = false;
-      for (const category of product.categories) {
-        // console.log(temp);
-        if (!allow) {
-          allow = category.id !== id;
-        }
-      }
-      return allow;
-    });
-    alert(stringify(filteredProducts));
-  }, []);
-  useEffect(() => {
     const makeRequest = async () => {
+      const Items = [];
       setIsLoading(true);
       try {
         const data = await getDocs(collection(db, "products"));
         data.forEach((item) => {
-          //añadimos productos de firebase a state products
-          addItem(item.data());
-          setIsLoading(false);
+          Items.push(item.data());
           setIsSuccess(true);
         });
+        setIsLoading(false);
+        addItem(Items);
       } catch (error) {
         console.log(error);
         setIsError(true);
       }
     };
-    if (products.length < 1) {
+    if (IdCat == 0) {
+      setCat(IdCat);
       makeRequest();
+    }
+  }, []);
+
+  useEffect(() => {
+    setCat(IdCat);
+    if (IdCat != 0) {
+      console.log(IdCat);
+      filterForCategory(IdCat);
+      console.log(products);
+      console.log(productsCategories);
     }
   }, []);
 
@@ -79,7 +79,7 @@ const ItemListContainer = ({ id }) => {
       return <div className="search-message">Algo salió mal</div>;
     }
     if (isSuccess) {
-      if (products) {
+      if (products || productsCategories) {
         return (
           <>
             <ItemList />

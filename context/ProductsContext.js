@@ -12,15 +12,29 @@ export const ProductsContext = createContext(null);
 //Provider
 export const ProductsContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [productsCategories, setProductsCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
-
+  const [cat, setCat] = useState(null);
   //Add product funciones a state
   const addItem = (product) => {
-    setProducts((prevProduct) => {
-      return prevProduct.concat(product);
+    setProducts(product);
+  };
+
+  const filterForCategory = (IdCat) => {
+    console.log(IdCat);
+    let filteredProducts = products.filter((product) => {
+      var allow = false;
+      for (const category of product.categories) {
+        if (!allow) {
+          allow = category.id == IdCat;
+        }
+      }
+      return allow;
     });
+    setProductsCategories(filteredProducts);
+    console.log(filteredProducts);
   };
 
   const values = useMemo(
@@ -30,11 +44,15 @@ export const ProductsContextProvider = ({ children }) => {
       isLoading,
       isSuccess,
       isError,
+      productsCategories,
+      cat,
       setProducts,
       addItem,
       setIsLoading,
       setIsSuccess,
       setIsError,
+      filterForCategory,
+      setCat,
     }),
     [products, isLoading]
   );

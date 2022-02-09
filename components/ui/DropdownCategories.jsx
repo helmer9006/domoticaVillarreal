@@ -1,10 +1,7 @@
 import React from "react";
-// import useCategories from "../hook/useCategories";
 import Link from "next/link";
 
 const DropdownCategories = () => {
-  // const query = useCategories();
-
   return (
     <>
       <div className="dropdown">
