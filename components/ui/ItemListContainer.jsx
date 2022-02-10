@@ -11,24 +11,20 @@ const override = css`
   margin: 25vh auto;
   border-color: "#593196";
 `;
-const ItemListContainer = ({ id: IdCat }) => {
-  const [filterItems, setFilterItems] = useState();
+const ItemListContainer = ({ id }) => {
   const {
     products,
     productsCategories,
     isLoading,
     isSuccess,
     isError,
-    setProducts,
     addItem,
     setIsLoading,
     setIsSuccess,
     setIsError,
     filterForCategory,
-    setCat,
   } = useProductsContext();
 
-  // let itemList = id ? : products
   let [color, setColor] = useState("#593196");
 
   useEffect(() => {
@@ -42,24 +38,31 @@ const ItemListContainer = ({ id: IdCat }) => {
           setIsSuccess(true);
         });
         setIsLoading(false);
+        filterForCategory(id);
         addItem(Items);
+        console.log(Items);
       } catch (error) {
         console.log(error);
         setIsError(true);
       }
     };
-    if (IdCat == 0) {
-      setCat(IdCat);
+    console.log(id == 0);
+    console.log(id);
+    if (id == 0) {
+      alert('he pasado por id = 0')
+
       makeRequest();
     }
   }, []);
 
-  useEffect(() => {
-    setCat(IdCat);
-    if (IdCat != 0) {
-      console.log(IdCat);
-      filterForCategory(IdCat);
-      console.log(products);
+  useEffect( async () => {
+
+    if (id > 0) {
+      alert('he pasado por id > 0')
+      alert(typeof(id))
+      console.log(id > 0);
+      console.log(id);
+      await filterForCategory(id);
       console.log(productsCategories);
     }
   }, []);
@@ -82,7 +85,7 @@ const ItemListContainer = ({ id: IdCat }) => {
       if (products || productsCategories) {
         return (
           <>
-            <ItemList />
+            <ItemList id={id}/>
           </>
         );
       }

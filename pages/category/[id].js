@@ -10,7 +10,11 @@ const product = () => {
     query: { id },
   } = router;
 
-  return <Layout> {id ? <ItemListContainer id={id} /> : null}</Layout>;
+  return (
+    <Layout>
+      <ItemListContainer id={parseInt(id)} />
+    </Layout>
+  );
 };
 
 export default product;

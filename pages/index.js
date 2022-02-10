@@ -5,7 +5,7 @@ import ItemListContainer from "../components/ui/ItemListContainer";
 const index = () => {
   return (
     <Layout>
-      <ItemListContainer id="0" />
+      <ItemListContainer id={0} />
     </Layout>
   );
 };
