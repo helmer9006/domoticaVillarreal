@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Item from "./Item";
 import { useProductsContext } from "../../context/ProductsContext";
-import { useRouter } from "next/router";
 
-const ItemList = () => {
-  const router = useRouter();
-  const {
-    query: { id },
-  } = router;
 
-  alert('id router'+id)
-  alert('id props'+id)
+const ItemList = ({id}) => {
 
   const { products, productsCategories, isLoading, isSuccess, isError } =
     useProductsContext();
-console.log(typeof(id));
-  const ItemsProducts = id > 0 ? productsCategories : products;
+    const ItemsProducts = id == '0' ? products : productsCategories;
+  alert("id router" + id);
+  alert("id props" + id);
   console.log(id);
   console.log(typeof id);
-  console.log(id);
   console.log(ItemsProducts);
+  console.log(products);
+
   return (
     <div className=" row d-flex justify-content-start">
       {

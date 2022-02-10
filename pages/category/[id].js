@@ -5,14 +5,15 @@ import Layout from "../../components/layout/Layout";
 import ItemListContainer from "../../components/ui/ItemListContainer";
 
 const product = () => {
+
   const router = useRouter();
   const {
     query: { id },
   } = router;
-
+  console.log(id)
   return (
     <Layout>
-      <ItemListContainer id={parseInt(id)} />
+      { id ? <ItemListContainer id={id}  /> : null}
     </Layout>
   );
 };

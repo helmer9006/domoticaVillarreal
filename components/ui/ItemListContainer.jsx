@@ -48,21 +48,20 @@ const ItemListContainer = ({ id }) => {
     };
     console.log(id == 0);
     console.log(id);
-    if (id == 0) {
-      alert('he pasado por id = 0')
+    if (id == '0') {
+      alert("he pasado por id = 0");
 
       makeRequest();
     }
   }, []);
 
-  useEffect( async () => {
-
-    if (id > 0) {
-      alert('he pasado por id > 0')
-      alert(typeof(id))
+  useEffect( () => {
+    if (id != '0') {
+      alert("he pasado por id != 0");
+      alert(typeof id);
       console.log(id > 0);
       console.log(id);
-      await filterForCategory(id);
+       filterForCategory(id);
       console.log(productsCategories);
     }
   }, []);
@@ -82,13 +81,11 @@ const ItemListContainer = ({ id }) => {
       return <div className="search-message">Algo salió mal</div>;
     }
     if (isSuccess) {
-      if (products || productsCategories) {
-        return (
-          <>
-            <ItemList id={id}/>
-          </>
-        );
-      }
+      return (
+        <>
+          <ItemList id={id} />
+        </>
+      );
     }
     return <></>;
   };
