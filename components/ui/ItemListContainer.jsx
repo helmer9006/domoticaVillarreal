@@ -14,7 +14,6 @@ const override = css`
 const ItemListContainer = ({ id }) => {
   const {
     products,
-    productsCategories,
     isLoading,
     isSuccess,
     isError,
@@ -22,7 +21,6 @@ const ItemListContainer = ({ id }) => {
     setIsLoading,
     setIsSuccess,
     setIsError,
-    filterForCategory,
   } = useProductsContext();
 
   let [color, setColor] = useState("#593196");
@@ -32,39 +30,46 @@ const ItemListContainer = ({ id }) => {
       const Items = [];
       setIsLoading(true);
       try {
-        const data = await getDocs(collection(db, "products"));
-        data.forEach((item) => {
-          Items.push(item.data());
+        if (id != "0") {
+          const data = await getDocs(collection(db, "products"));
+          data.forEach((item) => {
+            item.data().categories.map((category) => {
+              if (category.id == id) {
+                Items.push(item.data());
+              }
+            });
+          });
+          setIsLoading(false);
+          addItem(Items);
           setIsSuccess(true);
-        });
-        setIsLoading(false);
-        filterForCategory(id);
-        addItem(Items);
-        console.log(Items);
+        } else {
+          const data = await getDocs(collection(db, "products"));
+          data.forEach((item) => {
+            Items.push(item.data());
+            setIsSuccess(true);
+          });
+
+          addItem(Items);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log(error);
         setIsError(true);
       }
     };
-    console.log(id == 0);
-    console.log(id);
-    if (id == '0') {
-      alert("he pasado por id = 0");
+    makeRequest();
+  }, [id]);
 
-      makeRequest();
-    }
-  }, []);
-
-  useEffect( () => {
-    if (id != '0') {
-      alert("he pasado por id != 0");
-      alert(typeof id);
-      console.log(id > 0);
-      console.log(id);
-       filterForCategory(id);
-      console.log(productsCategories);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (id != "0") {
+  //     // alert("he pasado por id != 0");
+  //     // alert(typeof id);
+  //     console.log(id > 0);
+  //     console.log(id);
+  //     filterForCategory(id);
+  //     console.log(productsCategories);
+  //   }
+  // }, []);
 
   const renderResult = () => {
     if (isLoading) {

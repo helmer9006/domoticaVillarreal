@@ -2,17 +2,8 @@ import React, { useState, useEffect } from "react";
 import Item from "./Item";
 import { useProductsContext } from "../../context/ProductsContext";
 
-
-const ItemList = ({id}) => {
-
-  const { products, productsCategories, isLoading, isSuccess, isError } =
-    useProductsContext();
-    const ItemsProducts = id == '0' ? products : productsCategories;
-  alert("id router" + id);
-  alert("id props" + id);
-  console.log(id);
-  console.log(typeof id);
-  console.log(ItemsProducts);
+const ItemList = ({ id }) => {
+  const { products, isLoading, isSuccess, isError } = useProductsContext();
   console.log(products);
 
   return (
@@ -22,10 +13,8 @@ const ItemList = ({id}) => {
           <p>Error recuperando la lista de productos</p>
         ) : null)
       }
-      {ItemsProducts.length > 0
-        ? ItemsProducts.map((product) => (
-            <Item key={product.id} product={product} />
-          ))
+      {products
+        ? products.map((product) => <Item key={product.id} product={product} />)
         : null}
     </div>
   );

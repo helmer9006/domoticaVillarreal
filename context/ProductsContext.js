@@ -12,37 +12,14 @@ export const ProductsContext = createContext(null);
 
 //Provider
 export const ProductsContextProvider = ({ children }) => {
-
   const [products, setProducts] = useState([]);
-  const [productsCategories, setProductsCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
-  useEffect(() => {
-    if (productsCategories.length > 0) {
-      console.log(productsCategories);
-    }
-  }, [productsCategories]);
 
-  
   //Add product funciones a state
   const addItem = (product) => {
     setProducts(product);
-  };
-
-  const filterForCategory = (id) => {
-    alert("id filter" + id);
-    if (id == "0") return setProductsCategories([]);
-    let filteredProducts = products.filter((product) => {
-      var allow = false;
-      for (const category of product.categories) {
-        if (!allow) {
-          allow = category.id == id;
-        }
-      }
-      return allow;
-    });
-    setProductsCategories(filteredProducts);
   };
 
   const values = useMemo(
@@ -52,13 +29,11 @@ export const ProductsContextProvider = ({ children }) => {
       isLoading,
       isSuccess,
       isError,
-      productsCategories,
       setProducts,
       addItem,
       setIsLoading,
       setIsSuccess,
       setIsError,
-      filterForCategory,
     }),
     [products, isLoading]
   );
