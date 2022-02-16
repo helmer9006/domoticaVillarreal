@@ -17,7 +17,7 @@ Crear cuenta en la herramiento de google firebase y crear proyecto.
 
 Lo puede hacer descargando en https://firebase.google.com/
 
-###2. Instalación
+### 2. Instalación
 
 Archivos del proyecto.
 
