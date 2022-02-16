@@ -48,7 +48,7 @@ componentes funcionales de ReactJs
 
 ### Muestra funcional de Ecommerce
 
-![DomóticaVillarreal en funcionamiento](https://github.com/helmer9006/domoticaVillarreal/main/proyectofinal.gif)
+![DomóticaVillarreal en funcionamiento](https://github.com/helmer9006/domoticaVillarreal/main/blob/proyectofinal.gif)
 
 ### Versionado 📌
 He usado git y github para el versionado y respositorio remoto. Para todas las versiones disponibles documentación del codigo, revisar en https://github.com/helmer9006/domoticaVillarreal/.
