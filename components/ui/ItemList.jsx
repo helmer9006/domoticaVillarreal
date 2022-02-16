@@ -4,8 +4,6 @@ import { useProductsContext } from "../../context/ProductsContext";
 
 const ItemList = ({ id }) => {
   const { products, isLoading, isSuccess, isError } = useProductsContext();
-  console.log(products);
-
   return (
     <div className=" row d-flex justify-content-start">
       {

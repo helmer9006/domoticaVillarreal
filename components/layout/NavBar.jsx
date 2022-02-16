@@ -22,7 +22,10 @@ const NavBar = () => {
     const productRef = collection(db, "products");
     const q = query(productRef, where("name", "==", `${search}`));
     const querySnapshot = await getDocs(q);
+    console.log(search);
+    console.log(q);
     querySnapshot.forEach((doc) => {
+      alert("d");
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
       addItem(doc.data());
